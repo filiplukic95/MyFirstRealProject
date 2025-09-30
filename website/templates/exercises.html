@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Exercise Program | Personal Physio</title>
+<link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        .exercise-card {
+            transition: all 0.3s ease;
+        }
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i data-feather="activity" class="h-8 w-8 text-blue-600"></i>
+                        <span class="ml-2 text-xl font-bold text-blue-600">Personal Physio</span>
+</div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <a href="index.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</a>
+                    <a href="about.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">About</a>
+                    <a href="pricing.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Pricing</a>
+                    <a href="contact.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Contact</a>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <div class="ml-3 relative">
+                        <div>
+                            <button type="button" class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" id="user-menu" aria-expanded="false" aria-haspopup="true">
+                                <span class="sr-only">Open user menu</span>
+                                <img class="h-8 w-8 rounded-full" src="http://static.photos/people/200x200/4" alt="">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-controls="mobile-menu" aria-expanded="false">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div class="sm:hidden hidden" id="mobile-menu">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="/" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Home</a>
+                <a href="about.html" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">About</a>
+                <a href="pricing.html" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Pricing</a>
+                <a href="contact.html" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Contact</a>
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <a href="profile.html" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">Your Profile</a>
+                    <a href="login" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">Sign out</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <div class="bg-white shadow rounded-lg overflow-hidden mb-8" data-aos="fade-up">
+            <div class="px-6 py-5 border-b border-gray-200 bg-blue-50">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-2xl font-bold text-gray-900">
+                        Your Personalized Exercise Program
+                    </h2>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                        Updated: Today
+                    </span>
+                </div>
+                <p class="mt-2 text-gray-600">
+                    Based on your assessment, we've created this customized program to help relieve your lower back pain.
+                </p>
+            </div>
+            <div class="px-6 py-4 bg-white">
+                <div class="flex flex-wrap -mx-2">
+                    <div class="w-full sm:w-1/2 md:w-1/3 px-2 mb-4">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <i data-feather="clock" class="h-5 w-5 text-blue-600"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-sm font-medium text-gray-900">Program Duration</h3>
+                                    <p class="text-sm text-gray-500">4 weeks</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full sm:w-1/2 md:w-1/3 px-2 mb-4">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <i data-feather="calendar" class="h-5 w-5 text-blue-600"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-sm font-medium text-gray-900">Sessions per Week</h3>
+                                    <p class="text-sm text-gray-500">3-5 times</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full sm:w-1/2 md:w-1/3 px-2 mb-4">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <i data-feather="target" class="h-5 w-5 text-blue-600"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-sm font-medium text-gray-900">Primary Focus</h3>
+                                    <p class="text-sm text-gray-500">Lumbar stabilization</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-12">
+            <h3 class="text-lg font-medium text-gray-900 mb-4">Your Recommended Exercises</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Exercise Container 1 -->
+                <div class="bg-white shadow rounded-lg overflow-hidden exercise-card" data-aos="fade-up">
+                    <div class="video-container" id="exercise-video-1">
+                        <!-- Video will be loaded from database -->
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-lg font-medium text-gray-900" id="exercise-title-1">Exercise Title</h4>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800" id="exercise-level-1">
+                                Level
+                            </span>
+                        </div>
+                        <div class="mt-4 flex items-center text-sm text-gray-500">
+                            <i data-feather="clock" class="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-400"></i>
+                            <span id="exercise-sets-1">Sets and reps</span>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-600" id="exercise-description-1">
+                            Exercise description will be loaded from database
+                        </p>
+                        <div class="mt-4 flex items-center">
+                            <div class="flex-shrink-0">
+                                <img class="h-10 w-10 rounded-full" id="exercise-therapist-img-1" src="" alt="Therapist">
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900" id="exercise-therapist-name-1">Therapist Name</p>
+                                <p class="text-sm text-gray-500">Physiotherapist</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise Container 2 -->
+                <div class="bg-white shadow rounded-lg overflow-hidden exercise-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="video-container" id="exercise-video-2">
+                        <!-- Video will be loaded from database -->
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-lg font-medium text-gray-900" id="exercise-title-2">Exercise Title</h4>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800" id="exercise-level-2">
+                                Level
+                            </span>
+                        </div>
+                        <div class="mt-4 flex items-center text-sm text-gray-500">
+                            <i data-feather="clock" class="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-400"></i>
+                            <span id="exercise-sets-2">Sets and reps</span>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-600" id="exercise-description-2">
+                            Exercise description will be loaded from database
+                        </p>
+                        <div class="mt-4 flex items-center">
+                            <div class="flex-shrink-0">
+                                <img class="h-10 w-10 rounded-full" id="exercise-therapist-img-2" src="" alt="Therapist">
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900" id="exercise-therapist-name-2">Therapist Name</p>
+                                <p class="text-sm text-gray-500">Physiotherapist</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise Container 3 -->
+                <div class="bg-white shadow rounded-lg overflow-hidden exercise-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="video-container" id="exercise-video-3">
+                        <!-- Video will be loaded from database -->
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-lg font-medium text-gray-900" id="exercise-title-3">Exercise Title</h4>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800" id="exercise-level-3">
+                                Level
+                            </span>
+                        </div>
+                        <div class="mt-4 flex items-center text-sm text-gray-500">
+                            <i data-feather="clock" class="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-400"></i>
+                            <span id="exercise-sets-3">Sets and reps</span>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-600" id="exercise-description-3">
+                            Exercise description will be loaded from database
+                        </p>
+                        <div class="mt-4 flex items-center">
+                            <div class="flex-shrink-0">
+                                <img class="h-10 w-10 rounded-full" id="exercise-therapist-img-3" src="" alt="Therapist">
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900" id="exercise-therapist-name-3">Therapist Name</p>
+                                <p class="text-sm text-gray-500">Physiotherapist</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional exercise containers can be added dynamically based on data -->
+                <div id="additional-exercises-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Company</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="about.html" class="text-base text-gray-400 hover:text-white">About</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Careers</a></li>
+                        <li><a href="contact.html" class="text-base text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Resources</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Privacy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Legal</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Connect</h3>
+                    <div class="mt-4 flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i data-feather="facebook" class="h-6 w-6"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i data-feather="instagram" class="h-6 w-6"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i data-feather="twitter" class="h-6 w-6"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i data-feather="linkedin" class="h-6 w-6"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8">
+                <p class="text-base text-gray-400 text-center">
+                    &copy; <span id="current-year"></span> Personal Physio. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Initialize animations
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Initialize feather icons
+        feather.replace();
+
+        // Mobile menu toggle
+        document.querySelector('button[aria-controls="mobile-menu"]').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
