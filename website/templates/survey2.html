@@ -201,7 +201,7 @@
                 </h1>
                 <div class="flex items-center">
                     <span class="text-sm font-medium text-gray-500 mr-3">
-                    Stage: <span id="stage-display">1</span> | Progress: <span id="progress-display">0</span>%
+                    Stage: <span id="stage-display">2</span> | Progress: <span id="progress-display">0</span>%
 </span>
                     <div class="w-32">
                         <div class="progress-bar">
@@ -213,103 +213,8 @@
         </div>
     </div>
 
-    <!-- Main Content -->
-<div class="max-w-3xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div id="stage-1" class="bg-white shadow rounded-lg overflow-hidden question-card" data-aos="fade-up">
-            <div class="px-6 py-5 border-b border-gray-200">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Stage 1 - Basic Assessment
-</h3>
-            </div>
-            <div class="px-6 py-5">
-                <div id="question-container">
-                    <div class="question">
-                        <h4 class="text-lg font-medium text-gray-900 mb-4" id="question-text">Loading question...</h4>
-                        <div class="space-y-3" id="question-options">
-                            <!-- Options will be loaded here -->
-                        </div>
-                    </div>
-                </div>
-</div>
-            <div class="px-6 py-3 bg-gray-50 flex justify-between">
-                <button id="prev-btn" type="button" class="hidden inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    <i data-feather="arrow-left" class="mr-2 h-4 w-4"></i>
-                    Previous
-                </button>
-                <button id="next-btn" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    Next Question
-                    <i data-feather="arrow-right" class="ml-2 h-4 w-4"></i>
-                </button>
-            </div>
-</div>
-        <!-- Video Assessment Section (shown after stage 1) -->
-        <div id="video-assessment" class="hidden mt-8 bg-white shadow rounded-lg overflow-hidden question-card" data-aos="fade-up">
-            <div class="px-6 py-5 border-b border-gray-200">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Video Assessment
-                </h3>
-            </div>
-            <div class="px-6 py-5">
-                <p class="text-sm text-gray-500 mb-6">
-                    Based on your initial responses, please watch this video and perform the movement test before proceeding to stage 2 questions.
-                </p>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen id="assessment-video"></iframe>
-                </div>
-                <div class="mt-6">
-                    <button id="proceed-btn" type="button" class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        I've completed the test
-                        <i data-feather="arrow-right" class="ml-2 h-4 w-4"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-            <!-- Video Assessment Popup -->
-        <div id="video-popup" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-
-                <!-- Modal content -->
-                <form id="pain-form" method="POST" action="/survey2">
-
-                <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                            Quick Post-Test Question
-                        </h3>
-                        <div class="mt-4">
-                            <p class="text-sm text-gray-500">Did you experience any pain during the test?</p>
-                            <div class="mt-4 space-y-4">
-                                <div class="flex items-center">
-                                    <input id="pain-yes" name="pain-response" type="radio" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300" value="yes">
-                                    <label for="pain-yes" class="ml-3 block text-sm font-medium text-gray-700">Yes, I felt pain</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input id="pain-no" name="pain-response" type="radio" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300" value="no">
-                                    <label for="pain-no" class="ml-3 block text-sm font-medium text-gray-700">No, no pain</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input id="pain-some" name="pain-response" type="radio" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300" value="some">
-                                    <label for="pain-some" class="ml-3 block text-sm font-medium text-gray-700">Some discomfort but no severe pain</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button type="submit" id="submit-popup" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
-                            Continue to Stage 2
-                        </button>
-                    </div>
-                </div>
-                </form>
-            </div>
-</div>
-            </div>
-        </div>
-
-
         <!-- Stage 2 Questions Container -->
-        <div id="stage2-container" class="hidden mt-8 bg-white shadow rounded-lg overflow-hidden question-card" data-aos="fade-up">
+        <div id="stage2-container" class="mt-8 bg-white shadow rounded-lg overflow-hidden question-card" data-aos="fade-up">
             <div class="px-6 py-5 border-b border-gray-200">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
                     Stage 2 - Detailed Assessment
@@ -419,83 +324,14 @@
 
 
 
-// Question data
-        const questions = {{questions | tojson}}
-
-        let currentQuestionIndex = 0;
-        let answers = [];
-
-        // Initialize the questionnaire
-        function initQuestionnaire() {
-            loadQuestion(currentQuestionIndex);
-            updateProgress();
-        }
-
-        // Load question based on index
-        function loadQuestion(index) {
-            const question = questions[index];
-            const questionContainer = document.getElementById('question-container');
-            const questionText = document.getElementById('question-text');
-            const optionsContainer = document.getElementById('question-options');
-
-            questionText.textContent = question.question;
-            optionsContainer.innerHTML = '';
-
-            if (question.type === 'single') {
-                question.options.forEach((option, i) => {
-                    const optionElement = document.createElement('div');
-                    optionElement.className = 'option';
-                    optionElement.innerHTML = `
-                        <div class="option-radio"></div>
-                        <div class="option-text">${option}</div>
-                    `;
-                    optionElement.addEventListener('click', () => selectOption(i));
-                    optionsContainer.appendChild(optionElement);
-                });
-            } else if (question.type === 'range') {
-                const sliderContainer = document.createElement('div');
-                sliderContainer.className = 'slider-container';
-                sliderContainer.innerHTML = `
-                    <input type="range" min="${question.min}" max="${question.max}" value="${Math.floor((question.max - question.min)/2)}" class="slider" id="pain-range">
-                    <div class="slider-labels">
-                        <span>${question.labels[0]}</span>
-                        <span>${question.labels[1]}</span>
-                    </div>
-                `;
-                optionsContainer.appendChild(sliderContainer);
-            } else if (question.type === 'image') {
-                question.options.forEach((option, i) => {
-                    const optionElement = document.createElement('div');
-                    optionElement.className = 'image-option';
-                    optionElement.innerHTML = `
-                        <img src="${option.src}" alt="${option.label}" class="option-img">
-                        <div class="option-text">${option.label}</div>
-                    `;
-                    optionElement.addEventListener('click', () => selectOption(i));
-                    optionsContainer.appendChild(optionElement);
-                });
-            }
-        }
-
-        // Handle option selection
-        function selectOption(index) {
-            const options = document.querySelectorAll('.option, .image-option');
-            options.forEach((option, i) => {
-                if (i === index) {
-                    option.classList.add('selected');
-                    answers[currentQuestionIndex] = index;
-                } else {
-                    option.classList.remove('selected');
-                }
-            });
-        }
-
         // Update progress bar
-        function updateProgress() {
-            const progress = Math.round((currentQuestionIndex + 1) / questions.length * 100);
-            document.getElementById('progress-display').textContent = progress;
-            document.getElementById('progress-bar').style.width = `${progress}%`;
-        }
+                function updateProgress() {
+                    const progress = Math.round((currentQuestionIndex + 1) / questions.length * 100);
+                    document.getElementById('progress-display').textContent = progress;
+                    document.getElementById('progress-bar').style.width = `${progress}%`;
+                }
+
+
 
          // Stage 2 previous button handler
         document.getElementById('stage2-prev-btn').addEventListener('click', () => {
@@ -508,45 +344,7 @@
             // Here you would typically send the data to your backend
         });
 
-        // Next button handler
-        document.getElementById('next-btn').addEventListener('click', () => {
-            if (currentQuestionIndex < questions.length - 1) {
-                currentQuestionIndex++;
-                loadQuestion(currentQuestionIndex);
-                updateProgress();
-                document.getElementById('prev-btn').classList.remove('hidden');
-            } else {
-                // All questions completed
-                document.getElementById('question-container').parentElement.classList.add('hidden');
-                document.getElementById('stage-1').classList.add('hidden');
-                document.getElementById('video-assessment').classList.remove('hidden');
-            }
-        });
 
-        // Previous button handler
-        document.getElementById('prev-btn').addEventListener('click', () => {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                loadQuestion(currentQuestionIndex);
-                updateProgress();
-                if (currentQuestionIndex === 0) {
-                    document.getElementById('prev-btn').classList.add('hidden');
-                }
-            }
-        });
-
-   // Proceed button handler
-        document.getElementById('proceed-btn').addEventListener('click', () => {
-            document.getElementById('video-popup').classList.remove('hidden');
-        });
-
-        // Submit popup handler
-        document.getElementById('submit-popup').addEventListener('click', () => {
-            document.getElementById('video-popup').classList.add('hidden');
-            document.getElementById('video-assessment').classList.add('hidden');
-            document.getElementById('stage2-container').classList.remove('hidden');
-            document.getElementById('stage-display').textContent = '2';
-        });
         // Load stage 2 questions
         function loadStage2Questions() {
             const container = document.getElementById('stage2-questions');
@@ -590,7 +388,6 @@
         }
 
         // Initialize the questionnaire
-        initQuestionnaire();
         loadStage2Questions();
 </script>
 </body>

@@ -6,6 +6,7 @@ from sqlalchemy.sql import func
 class Questions(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     question=db.Column(db.String(1000),nullable=False)
+    options=db.Column(db.String(1000),nullable=False)
     stage=db.Column(db.Integer,nullable=False)
     v_group_name=db.Column(db.String(120),db.ForeignKey("video_group.name"))
 class User(db.Model,UserMixin):
