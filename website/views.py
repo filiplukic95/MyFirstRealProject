@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, jsonify,request
 from flask_login import login_required, current_user
-from .models import Questions
+from .models import Questions,Video
 import json
 views = Blueprint("views", __name__)
 
@@ -46,3 +46,17 @@ def survey2():
             })
     print(answer)
     return render_template("survey2.html",user=current_user,questions2=result2)
+
+@views.route("/exercises")
+@login_required
+def exercises():
+    group = 2
+    videos=Video.query.filter_by(group_id=group)
+    urls=[]
+    titles=[]
+    for v in videos:
+            urls.append(v.url)
+            titles.append(v.title)
+    print(urls)
+    print(titles)
+    return render_template("exercises.html",title1=titles[0],title2=titles[1],url1=urls[0],url2=urls[1])

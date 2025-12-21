@@ -50,13 +50,17 @@
                     <a href="pricing.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Pricing</a>
                     <a href="contact.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Contact</a>
                 </div>
-                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                <div class="hidden sm:ml-6 sm:flex sm:items-center hovered-element">
                     <div class="ml-3 relative">
-                        <div>
+                        <div class="hovered-element">
                             <button type="button" class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" id="user-menu" aria-expanded="false" aria-haspopup="true">
                                 <span class="sr-only">Open user menu</span>
-                                <img class="h-8 w-8 rounded-full" src="http://static.photos/people/200x200/4" alt="">
+                                <img class="h-8 w-8 rounded-full hovered-element" src="http://static.photos/people/200x200/4" alt="">
                             </button>
+                        </div>
+                        <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 hidden" id="user-menu-dropdown">
+                            <a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your Profile</a>
+                            <a href="login.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
                         </div>
                     </div>
                 </div>
@@ -71,13 +75,13 @@
         <!-- Mobile menu -->
         <div class="sm:hidden hidden" id="mobile-menu">
             <div class="pt-2 pb-3 space-y-1">
-                <a href="/" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Home</a>
+                <a href="index.html" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Home</a>
                 <a href="about.html" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">About</a>
                 <a href="pricing.html" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Pricing</a>
                 <a href="contact.html" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Contact</a>
                 <div class="mt-4 pt-4 border-t border-gray-200">
                     <a href="profile.html" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">Your Profile</a>
-                    <a href="login" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">Sign out</a>
+                    <a href="login.html" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">Sign out</a>
                 </div>
             </div>
         </div>
@@ -146,104 +150,13 @@
 
         <div class="mb-12">
             <h3 class="text-lg font-medium text-gray-900 mb-4">Your Recommended Exercises</h3>
-
+            
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Exercise Container 1 -->
-                <div class="bg-white shadow rounded-lg overflow-hidden exercise-card" data-aos="fade-up">
-                    <div class="video-container" id="exercise-video-1">
-                        <!-- Video will be loaded from database -->
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between">
-                            <h4 class="text-lg font-medium text-gray-900" id="exercise-title-1">Exercise Title</h4>
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800" id="exercise-level-1">
-                                Level
-                            </span>
-                        </div>
-                        <div class="mt-4 flex items-center text-sm text-gray-500">
-                            <i data-feather="clock" class="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-400"></i>
-                            <span id="exercise-sets-1">Sets and reps</span>
-                        </div>
-                        <p class="mt-3 text-sm text-gray-600" id="exercise-description-1">
-                            Exercise description will be loaded from database
-                        </p>
-                        <div class="mt-4 flex items-center">
-                            <div class="flex-shrink-0">
-                                <img class="h-10 w-10 rounded-full" id="exercise-therapist-img-1" src="" alt="Therapist">
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-gray-900" id="exercise-therapist-name-1">Therapist Name</p>
-                                <p class="text-sm text-gray-500">Physiotherapist</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Exercise Container 2 -->
-                <div class="bg-white shadow rounded-lg overflow-hidden exercise-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="video-container" id="exercise-video-2">
-                        <!-- Video will be loaded from database -->
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between">
-                            <h4 class="text-lg font-medium text-gray-900" id="exercise-title-2">Exercise Title</h4>
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800" id="exercise-level-2">
-                                Level
-                            </span>
-                        </div>
-                        <div class="mt-4 flex items-center text-sm text-gray-500">
-                            <i data-feather="clock" class="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-400"></i>
-                            <span id="exercise-sets-2">Sets and reps</span>
-                        </div>
-                        <p class="mt-3 text-sm text-gray-600" id="exercise-description-2">
-                            Exercise description will be loaded from database
-                        </p>
-                        <div class="mt-4 flex items-center">
-                            <div class="flex-shrink-0">
-                                <img class="h-10 w-10 rounded-full" id="exercise-therapist-img-2" src="" alt="Therapist">
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-gray-900" id="exercise-therapist-name-2">Therapist Name</p>
-                                <p class="text-sm text-gray-500">Physiotherapist</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Exercise Container 3 -->
-                <div class="bg-white shadow rounded-lg overflow-hidden exercise-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="video-container" id="exercise-video-3">
-                        <!-- Video will be loaded from database -->
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center justify-between">
-                            <h4 class="text-lg font-medium text-gray-900" id="exercise-title-3">Exercise Title</h4>
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800" id="exercise-level-3">
-                                Level
-                            </span>
-                        </div>
-                        <div class="mt-4 flex items-center text-sm text-gray-500">
-                            <i data-feather="clock" class="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-400"></i>
-                            <span id="exercise-sets-3">Sets and reps</span>
-                        </div>
-                        <p class="mt-3 text-sm text-gray-600" id="exercise-description-3">
-                            Exercise description will be loaded from database
-                        </p>
-                        <div class="mt-4 flex items-center">
-                            <div class="flex-shrink-0">
-                                <img class="h-10 w-10 rounded-full" id="exercise-therapist-img-3" src="" alt="Therapist">
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-gray-900" id="exercise-therapist-name-3">Therapist Name</p>
-                                <p class="text-sm text-gray-500">Physiotherapist</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Additional exercise containers can be added dynamically based on data -->
-                <div id="additional-exercises-container"></div>
+                
             </div>
+        </div>
+                <!-- Additional exercises will be loaded dynamically here -->
+</div>
         </div>
     </div>
 
@@ -300,8 +213,100 @@
             </div>
         </div>
     </footer>
-
     <script>
+        // Sample exercise data
+        const exercises = [
+            {
+                id: 1,
+                title: "{{title1}}",
+                level: "Beginner",
+                sets: "3 sets of 10 reps",
+                description: "Strengthens lower back and core muscles while improving pelvic alignment.",
+                therapist: {
+                    name: "Dr. Sarah Johnson",
+                    img: "http://static.photos/people/200x200/1"
+                },
+                videoId: "{{url1}}" // YouTube video ID
+            },
+            {
+                id: 2,
+                title: "{{title2}}",
+                level: "Beginner",
+                sets: "2 sets of 8 reps",
+                description: "Improves spinal flexibility and relieves tension in the back muscles.",
+                therapist: {
+                    name: "Dr. Michael Chen",
+                    img: "http://static.photos/people/200x200/2"
+                },
+                videoId: "{{url2}}"
+            },
+            {
+                id: 3,
+                title: "Bird Dog Exercise",
+                level: "Intermediate",
+                sets: "3 sets of 10 reps each side",
+                description: "Strengthens core and back muscles while improving balance and coordination.",
+                therapist: {
+                    name: "Dr. Emma Rodriguez",
+                    img: "http://static.photos/people/200x200/3"
+                },
+                videoId: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+            },
+            {
+                id: 4,
+                title: "Child's Pose with Side Stretch",
+                level: "Beginner",
+                sets: "Hold for 30 seconds each side",
+                description: "Gently stretches the lower back and sides to relieve tension and improve mobility.",
+                therapist: {
+                    name: "Dr. James Wilson",
+                    img: "http://static.photos/people/200x200/4"
+                },
+                videoId: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+            }
+        ];
+
+        // Load exercises into the page
+        function loadExercises() {
+            const container = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-6');
+            
+            exercises.forEach(exercise => {
+                const exerciseDiv = document.createElement('div');
+                exerciseDiv.className = 'bg-white shadow rounded-lg overflow-hidden exercise-card';
+                exerciseDiv.setAttribute('data-aos', 'fade-up');
+                exerciseDiv.innerHTML = `
+                    <div class="video-container">
+                        <iframe src=${exercise.videoId} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-lg font-medium text-gray-900">${exercise.title}</h4>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                ${exercise.level}
+                            </span>
+                        </div>
+                        <div class="mt-4 flex items-center text-sm text-gray-500">
+                            <i data-feather="clock" class="flex-shrink-0 mr-1.5 h-4 w-4 text-gray-400"></i>
+                            <span>${exercise.sets}</span>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-600">
+                            ${exercise.description}
+                        </p>
+                        <div class="mt-4 flex items-center">
+                            <div class="flex-shrink-0">
+                                <img class="h-10 w-10 rounded-full" src="${exercise.therapist.img}" alt="Therapist">
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">${exercise.therapist.name}</p>
+                                <p class="text-sm text-gray-500">Physiotherapist</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(exerciseDiv);
+            });
+        }
+
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
@@ -320,6 +325,25 @@
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         });
+
+        // User menu dropdown toggle
+        document.getElementById('user-menu').addEventListener('click', function() {
+            const dropdown = document.getElementById('user-menu-dropdown');
+            dropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('user-menu-dropdown');
+            const button = document.getElementById('user-menu');
+            
+            if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // Load exercises when page loads
+        document.addEventListener('DOMContentLoaded', loadExercises);
     </script>
 </body>
 </html>

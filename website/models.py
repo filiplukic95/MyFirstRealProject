@@ -14,7 +14,6 @@ class User(db.Model,UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     full_name = db.Column(db.String(120), nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
-    subscription_active = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime(timezone=True), default=func.now())
 
 class Survey(db.Model):
@@ -33,6 +32,10 @@ class Video(db.Model):
     title = db.Column(db.String(100))
     url = db.Column(db.String(200))
     group_id = db.Column(db.Integer, db.ForeignKey('video_group.id'))
+    format=db.Column(db.String(200))
+    DurationInSeconds=db.Column(db.Integer)
+    size=db.Column(db.Integer)
+    DateAdded=db.Column(db.DateTime(timezone=True), default=func.now())
 
 class UserVideoAccess(db.Model):
     id = db.Column(db.Integer, primary_key=True)
