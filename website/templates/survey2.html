@@ -80,60 +80,7 @@
             font-size: 0.875rem;
             color: #374151;
         }
-        /* Image option styles */
-        .image-option {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 1rem;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .image-option:hover {
-            background-color: #f9fafb;
-            border-color: #d1d5db;
-        }
-        .image-option.selected {
-            background-color: #eff6ff;
-            border-color: #3b82f6;
-        }
-        .option-img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 0.25rem;
-            margin-bottom: 0.75rem;
-        }
-        /* Range slider styles */
-        .slider-container {
-            padding: 1rem 0;
-        }
-        .slider-labels {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 0.5rem;
-            font-size: 0.875rem;
-            color: #6b7280;
-        }
-        .slider {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: #e5e7eb;
-            outline: none;
-        }
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #3b82f6;
-            cursor: pointer;
-        }
+
     </style>
 </head>
 <body class="font-sans antialiased text-gray-800 bg-gray-50">
@@ -201,12 +148,10 @@
                 </h1>
                 <div class="flex items-center">
                     <span class="text-sm font-medium text-gray-500 mr-3">
-                    Stage: <span id="stage-display">2</span> | Progress: <span id="progress-display">0</span>%
-</span>
-                    <div class="w-32">
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progress-bar" style="width: 0%"></div>
-</div>
+                        Questions: <span id="current-question">1</span>/<span id="total-questions">2</span>
+                    </span>
+                    <div class="w-32 bg-gray-200 rounded-full h-2.5">
+                        <div class="bg-blue-600 h-2.5 rounded-full" id="stage2-progress" style="width: 0%"></div>
                     </div>
                 </div>
             </div>
@@ -214,15 +159,16 @@
     </div>
 
         <!-- Stage 2 Questions Container -->
-        <div id="stage2-container" class="mt-8 bg-white shadow rounded-lg overflow-hidden question-card" data-aos="fade-up">
+    <div class="max-w-3xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <div class="bg-white shadow rounded-lg overflow-hidden question-card" data-aos="fade-up">
             <div class="px-6 py-5 border-b border-gray-200">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Stage 2 - Detailed Assessment
+                    Detailed Assessment Questions
                 </h3>
             </div>
             <div class="px-6 py-5">
                 <div id="stage2-questions">
-                    <!-- Stage 2 questions will be loaded dynamically from database -->
+                    <!-- Questions will be loaded here -->
                 </div>
             </div>
             <div class="px-6 py-3 bg-gray-50 flex justify-between">
@@ -236,7 +182,8 @@
                 </button>
             </div>
         </div>
-</div>
+    </div>
+
 
     <!-- Footer -->
     <footer class="bg-gray-800 mt-12">
@@ -320,58 +267,73 @@
         // Stage 2 questions
         const stage2Questions = {{questions2 | tojson}}
 
+        let currentStage2Question = 0;
+        let stage2Answers = [];
 
 
 
-
-        // Update progress bar
-                function updateProgress() {
-                    const progress = Math.round((currentQuestionIndex + 1) / questions.length * 100);
-                    document.getElementById('progress-display').textContent = progress;
-                    document.getElementById('progress-bar').style.width = `${progress}%`;
-                }
-
-
-
-         // Stage 2 previous button handler
-        document.getElementById('stage2-prev-btn').addEventListener('click', () => {
-            // You can implement navigation between stage 2 questions here if needed
-        });
-
-        // Submit button handler
-        document.getElementById('submit-btn').addEventListener('click', () => {
-            alert('Assessment submitted successfully!');
-            // Here you would typically send the data to your backend
-        });
-
+        // Initialize the questionnaire
+        function initStage2Questionnaire() {
+            loadStage2Questions();
+            updateStage2Progress();
+        }
 
         // Load stage 2 questions
         function loadStage2Questions() {
             const container = document.getElementById('stage2-questions');
             container.innerHTML = '';
 
-            stage2Questions.forEach((question, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'question';
-                questionDiv.innerHTML = `
-                    <h4 class="text-lg font-medium text-gray-900 mb-4">${question.question}</h4>
-                    <div class="space-y-3" id="stage2-options-${index}"></div>
+            // Show current question only
+            showStage2Question(0);
+        }
+
+        function showStage2Question(index) {
+            const container = document.getElementById('stage2-questions');
+
+            // Remove existing question if any
+            const existingQuestion = container.querySelector('#current-stage2-question');
+            if (existingQuestion) {
+                container.removeChild(existingQuestion);
+            }
+
+            const question = stage2Questions[index];
+            const questionDiv = document.createElement('div');
+            questionDiv.id = 'current-stage2-question';
+            questionDiv.className = 'question';
+            questionDiv.innerHTML = `
+                <h4 class="text-lg font-medium text-gray-900 mb-4">${question.question}</h4>
+                <div class="space-y-3" id="stage2-options-${index}"></div>
+            `;
+
+            const optionsContainer = questionDiv.querySelector(`#stage2-options-${index}`);
+            question.options.forEach((option, i) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-radio"></div>
+                    <div class="option-text">${option}</div>
                 `;
-
-                const optionsContainer = questionDiv.querySelector(`#stage2-options-${index}`);
-                question.options.forEach((option, i) => {
-                    const optionElement = document.createElement('div');
-                    optionElement.className = 'option';
-                    optionElement.innerHTML = `
-                        <div class="option-radio"></div>
-                        <div class="option-text">${option}</div>
-                    `;
-                    optionElement.addEventListener('click', () => selectStage2Option(index, i));
-                    optionsContainer.appendChild(optionElement);
+                optionElement.addEventListener('click', () => {
+                    selectStage2Option(index, i);
+                    // Auto-progress to next question after selection
+                    if (currentStage2Question < stage2Questions.length - 1) {
+                        currentStage2Question++;
+                        showStage2Question(currentStage2Question);
+                        updateStage2Progress();
+                    }
                 });
-
-                container.appendChild(questionDiv);
+                optionsContainer.appendChild(optionElement);
             });
+
+            container.appendChild(questionDiv);
+            updateStage2Progress();
+        }
+
+        function updateStage2Progress() {
+            document.getElementById('current-question').textContent = currentStage2Question + 1;
+            document.getElementById('total-questions').textContent = stage2Questions.length;
+            const progress = Math.round((currentStage2Question + 1) / stage2Questions.length * 100);
+            document.getElementById('stage2-progress').style.width = `${progress}%`;
         }
 
         // Handle stage 2 option selection
@@ -380,15 +342,42 @@
             options.forEach((option, i) => {
                 if (i === optionIndex) {
                     option.classList.add('selected');
-                    answers[questionIndex + questions.length] = optionIndex;
+                    stage2Answers[questionIndex] = optionIndex;
                 } else {
                     option.classList.remove('selected');
                 }
             });
         }
 
+        // Stage 2 previous button handler
+        document.getElementById('stage2-prev-btn').addEventListener('click', () => {
+            if (currentStage2Question > 0) {
+                currentStage2Question--;
+                showStage2Question(currentStage2Question);
+                updateStage2Progress();
+            }
+        });
+
+        // Submit button handler
+        document.getElementById('submit-btn').addEventListener('click', () => {
+            // Get stage 1 answers from localStorage
+            const stage1Answers = JSON.parse(localStorage.getItem('stage1Answers') || '[]');
+
+            // Combine all answers
+            const allAnswers = [...stage1Answers, ...stage2Answers];
+
+            // Here you would typically send the data to your backend
+            console.log('All answers:', allAnswers);
+
+            alert('Assessment submitted successfully!');
+            window.location.href = 'exercises.html';
+        });
+
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
         // Initialize the questionnaire
-        loadStage2Questions();
+        initStage2Questionnaire();
 </script>
 </body>
 </html>

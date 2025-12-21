@@ -254,7 +254,7 @@
                     Based on your initial responses, please watch this video and perform the movement test before proceeding to stage 2 questions.
                 </p>
                 <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen id="assessment-video"></iframe>
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen id="assessment-video"></iframe>
                 </div>
                 <div class="mt-6">
                     <button id="proceed-btn" type="button" class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
@@ -305,33 +305,6 @@
             </div>
 </div>
             </div>
-        </div>
-
-
-        <!-- Stage 2 Questions Container -->
-        <div id="stage2-container" class="hidden mt-8 bg-white shadow rounded-lg overflow-hidden question-card" data-aos="fade-up">
-            <div class="px-6 py-5 border-b border-gray-200">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                    Stage 2 - Detailed Assessment
-                </h3>
-            </div>
-            <div class="px-6 py-5">
-                <div id="stage2-questions">
-                    <!-- Stage 2 questions will be loaded dynamically from database -->
-                </div>
-            </div>
-            <div class="px-6 py-3 bg-gray-50 flex justify-between">
-                <button id="stage2-prev-btn" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    <i data-feather="arrow-left" class="mr-2 h-4 w-4"></i>
-                    Previous
-                </button>
-                <button id="submit-btn" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                    Submit Assessment
-                    <i data-feather="check" class="ml-2 h-4 w-4"></i>
-                </button>
-            </div>
-        </div>
-</div>
 
     <!-- Footer -->
     <footer class="bg-gray-800 mt-12">
@@ -412,8 +385,7 @@
         // Initialize feather icons
         feather.replace();
 
-        // Stage 2 questions
-        const stage2Questions = {{questions2 | tojson}}
+
 
 
 
@@ -497,16 +469,7 @@
             document.getElementById('progress-bar').style.width = `${progress}%`;
         }
 
-         // Stage 2 previous button handler
-        document.getElementById('stage2-prev-btn').addEventListener('click', () => {
-            // You can implement navigation between stage 2 questions here if needed
-        });
 
-        // Submit button handler
-        document.getElementById('submit-btn').addEventListener('click', () => {
-            alert('Assessment submitted successfully!');
-            // Here you would typically send the data to your backend
-        });
 
         // Next button handler
         document.getElementById('next-btn').addEventListener('click', () => {
@@ -547,51 +510,13 @@
             document.getElementById('stage2-container').classList.remove('hidden');
             document.getElementById('stage-display').textContent = '2';
         });
-        // Load stage 2 questions
-        function loadStage2Questions() {
-            const container = document.getElementById('stage2-questions');
-            container.innerHTML = '';
 
-            stage2Questions.forEach((question, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'question';
-                questionDiv.innerHTML = `
-                    <h4 class="text-lg font-medium text-gray-900 mb-4">${question.question}</h4>
-                    <div class="space-y-3" id="stage2-options-${index}"></div>
-                `;
 
-                const optionsContainer = questionDiv.querySelector(`#stage2-options-${index}`);
-                question.options.forEach((option, i) => {
-                    const optionElement = document.createElement('div');
-                    optionElement.className = 'option';
-                    optionElement.innerHTML = `
-                        <div class="option-radio"></div>
-                        <div class="option-text">${option}</div>
-                    `;
-                    optionElement.addEventListener('click', () => selectStage2Option(index, i));
-                    optionsContainer.appendChild(optionElement);
-                });
 
-                container.appendChild(questionDiv);
-            });
-        }
-
-        // Handle stage 2 option selection
-        function selectStage2Option(questionIndex, optionIndex) {
-            const options = document.querySelectorAll(`#stage2-options-${questionIndex} .option`);
-            options.forEach((option, i) => {
-                if (i === optionIndex) {
-                    option.classList.add('selected');
-                    answers[questionIndex + questions.length] = optionIndex;
-                } else {
-                    option.classList.remove('selected');
-                }
-            });
-        }
 
         // Initialize the questionnaire
         initQuestionnaire();
-        loadStage2Questions();
+
 </script>
 </body>
 </html>
