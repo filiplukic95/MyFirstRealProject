@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Personal Physio</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        .profile-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+        .tab-active {
+            border-bottom: 2px solid #3b82f6;
+            color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i data-feather="activity" class="h-8 w-8 text-blue-600"></i>
+                        <span class="ml-2 text-xl font-bold text-blue-600">Personal Physio</span>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <a href="/" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</a>
+                    <a href="/exercises" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Exercises</a>
+                    <a href="questionnaire-stage1.html" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Assessment</a>
+<a href="/profile" class="border-blue-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Profile</a>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center hovered-element">
+                    <div class="ml-3 relative">
+                        <div class="hovered-element">
+                            <button type="button" class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" id="user-menu" aria-expanded="false" aria-haspopup="true">
+                                <span class="sr-only">Open user menu</span>
+                                <img class="h-8 w-8 rounded-full hovered-element" src="http://static.photos/people/200x200/4" alt="">
+                            </button>
+                        </div>
+                        <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 hidden" id="user-menu-dropdown">
+                            <a href="/profile" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your Profile</a>
+                            <a href="/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-controls="mobile-menu" aria-expanded="false">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div class="sm:hidden hidden" id="mobile-menu">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="/" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Home</a>
+                <a href="/exercises" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Exercises</a>
+                <a href="questionnaire-stage1.html" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Assessment</a>
+<a href="/profile" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Profile</a>
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <a href="/logout" class="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100">Sign out</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <img class="h-20 w-20 rounded-full border-4 border-white" src="http://static.photos/people/200x200/4" alt="Profile photo">
+                </div>
+                <div class="ml-6">
+                    <h1 class="text-3xl font-bold text-white" id="profile-name">John Doe</h1>
+                    <p class="text-blue-100" id="profile-email">john.doe@example.com</p>
+                    <p class="mt-2 text-blue-100">
+                        Member since: <span id="member-since">January 2023</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Navigation -->
+    <div class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex overflow-x-auto">
+                <div class="flex space-x-8">
+                    <button id="profile-tab" class="tab-active py-4 px-1 border-b-2 font-medium text-sm">
+                        Profile Info
+                    </button>
+                    <button id="password-tab" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 py-4 px-1 border-b-2 font-medium text-sm">
+                        Change Password
+                    </button>
+                    <button id="subscription-tab" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 py-4 px-1 border-b-2 font-medium text-sm">
+                        Subscription
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <!-- Profile Info Section -->
+        <div id="profile-section" class="bg-white shadow rounded-lg overflow-hidden">
+            <div class="px-6 py-5 border-b border-gray-200">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    Personal Information
+                </h3>
+                <p class="mt-1 text-sm text-gray-500">
+                    Update your personal details and contact information.
+                </p>
+            </div>
+            <div class="px-6 py-4">
+                {% with messages=get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class="flashes">
+                            {% for message in messages %}
+                                <li style="color: green; font-weight: bold;">{{message}}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+                <form method="post">
+                    <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                        <div class="sm:col-span-6">
+                            <label for="full-name" class="block text-sm font-medium text-gray-700">Full name</label>
+                            <input type="text" name="full-name" id="full-name" autocomplete="name" value="{{full_name}}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md py-2 px-3 border" disabled>
+                        </div>
+
+                        <div class="sm:col-span-4">
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+                            <input id="email" name="email" type="email" autocomplete="email" value="{{email}}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md py-2 px-3 border" readonly>
+                        </div>
+
+                        <div class="sm:col-span-3">
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone number</label>
+                            <input type="text" name="phone" id="phone" autocomplete="tel" value="{{phone}}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md py-2 px-3 border" disabled>
+                        </div>
+
+                        <div class="sm:col-span-3">
+                            <label for="birthdate" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                            <input type="date" name="birthdate" id="birthdate" value="{{date_of_birth}}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md py-2 px-3 border" disabled>
+                        </div>
+
+
+
+                        <div class="sm:col-span-3">
+                            <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+                            <input type="text" name="city" id="city" autocomplete="address-level2" value="{{city}}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md py-2 px-3 border" disabled>
+                        </div>
+
+                        <div class="sm:col-span-3">
+                            <label for="state" class="block text-sm font-medium text-gray-700">State / Province</label>
+                            <input type="text" name="state" id="state" autocomplete="address-level1" value="{{state}}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md py-2 px-3 border" disabled>
+                        </div>
+
+
+                    </div>
+                    <div class="mt-8 border-t border-gray-200 pt-5">
+                        <div class="flex justify-end">
+                            <button type="button" id="edit-profile-btn" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                <i data-feather="edit-2" class="mr-2 h-4 w-4"></i>
+                                Edit Profile
+                            </button>
+                            <button type="button" id="cancel-edit-btn" class="hidden ml-3 bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                Cancel
+                            </button>
+                            <button type="submit" id="save-profile-btn" name="act" value="change-info" class="hidden ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Change Password Section -->
+        <div id="password-section" class="hidden bg-white shadow rounded-lg overflow-hidden mt-8">
+            <div class="px-6 py-5 border-b border-gray-200">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    Change Password
+                </h3>
+                <p class="mt-1 text-sm text-gray-500">
+                    Update your account password.
+                </p>
+            </div>
+            <div class="px-6 py-4">
+                {% with messages=get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class="flashes">
+                            {% for message in messages %}
+                                <li style="color: green; font-weight: bold;">{{message}}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+                <form method="post">
+                    <div class="space-y-6">
+                        <div>
+                            <label for="current-password" class="block text-sm font-medium text-gray-700">Current Password</label>
+                            <div class="mt-1 relative rounded-md shadow-sm">
+                                <input id="current-password" name="current-password" type="password" autocomplete="current-password" required class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-3 sm:text-sm border-gray-300 rounded-md py-2 px-3 border" placeholder="••••••••">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="new-password" class="block text-sm font-medium text-gray-700">New Password</label>
+                            <div class="mt-1 relative rounded-md shadow-sm">
+                                <input id="new-password" name="new-password" type="password" required class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-3 sm:text-sm border-gray-300 rounded-md py-2 px-3 border" placeholder="••••••••">
+                            </div>
+                            <p id="password-error" class="mt-1 text-sm text-red-600 hidden">Password must be at least 8 characters</p>
+                        </div>
+
+                        <div>
+                            <label for="confirm-new-password" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
+                            <div class="mt-1 relative rounded-md shadow-sm">
+                                <input id="confirm-new-password" name="confirm-new-password" type="password" required class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-3 sm:text-sm border-gray-300 rounded-md py-2 px-3 border" placeholder="••••••••">
+                            </div>
+                            <p id="confirm-error" class="mt-1 text-sm text-red-600 hidden">Passwords do not match</p>
+                        </div>
+                    </div>
+                    <div class="mt-8 border-t border-gray-200 pt-5">
+                        <div class="flex justify-end">
+                            <button type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                Cancel
+                            </button>
+                            <button type="submit" id="submit-btn" name="act" value="change-pass" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                Update Password
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Subscription Section -->
+        <div id="subscription-section" class="hidden bg-white shadow rounded-lg overflow-hidden mt-8">
+            <div class="px-6 py-5 border-b border-gray-200">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    Subscription Details
+                </h3>
+                <p class="mt-1 text-sm text-gray-500">
+                    Manage your subscription plan and billing information.
+                </p>
+            </div>
+            <div class="px-6 py-4">
+                <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="text-lg font-medium text-blue-900">Premium Plan</h4>
+                            <p class="text-sm text-blue-700 mt-1">Monthly subscription</p>
+                        </div>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                            Active
+                        </span>
+                    </div>
+                    <div class="mt-4 border-t border-blue-200 pt-4">
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-blue-800">Next billing date:</span>
+                            <span class="font-medium text-blue-900">December 15, 2023</span>
+                        </div>
+                        <div class="flex justify-between text-sm mb-4">
+                            <span class="text-blue-800">Amount:</span>
+                            <span class="font-medium text-blue-900">$29.99/month</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button type="button" class="inline-flex items-center px-4 py-2 border border-blue-300 shadow-sm text-sm font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                Change Plan
+                            </button>
+                            <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                Cancel Subscription
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <h4 class="text-sm font-medium text-gray-900 mb-3">Payment Method</h4>
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                        <div class="flex items-center">
+                            <i data-feather="credit-card" class="h-6 w-6 text-gray-400 mr-3"></i>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">Visa ending in 4242</p>
+                                <p class="text-xs text-gray-500">Expires 12/25</p>
+                            </div>
+                        </div>
+                        <button type="button" class="text-sm text-blue-600 hover:text-blue-500 font-medium">
+                            Update
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Company</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="about.html" class="text-base text-gray-400 hover:text-white">About</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Careers</a></li>
+                        <li><a href="contact.html" class="text-base text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Resources</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Privacy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Legal</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Connect</h3>
+                    <div class="mt-4 flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i data-feather="facebook" class="h-6 w-6"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i data-feather="instagram" class="h-6 w-6"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i data-feather="twitter" class="h-6 w-6"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i data-feather="linkedin" class="h-6 w-6"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8">
+                <p class="text-base text-gray-400 text-center">
+                    &copy; <span id="current-year"></span> Personal Physio. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('button[aria-controls="mobile-menu"]').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // User menu dropdown toggle
+        document.getElementById('user-menu').addEventListener('click', function() {
+            const dropdown = document.getElementById('user-menu-dropdown');
+            dropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('user-menu-dropdown');
+            const button = document.getElementById('user-menu');
+
+            if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // Tab switching functionality
+        const tabs = {
+            'profile-tab': 'profile-section',
+            'password-tab': 'password-section',
+            'subscription-tab': 'subscription-section'
+        };
+
+        Object.keys(tabs).forEach(tabId => {
+            document.getElementById(tabId).addEventListener('click', function() {
+                // Hide all sections
+                Object.values(tabs).forEach(sectionId => {
+                    document.getElementById(sectionId).classList.add('hidden');
+                });
+
+                // Remove active class from all tabs
+                Object.keys(tabs).forEach(id => {
+                    const tab = document.getElementById(id);
+                    tab.classList.remove('tab-active');
+                    tab.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                });
+
+                // Show selected section
+                document.getElementById(tabs[tabId]).classList.remove('hidden');
+
+                // Add active class to selected tab
+                this.classList.add('tab-active');
+                this.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+            });
+        });
+
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Initialize animations
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Initialize feather icons
+        feather.replace();
+
+        // Profile edit functionality
+        const editProfileBtn = document.getElementById('edit-profile-btn');
+        const cancelEditBtn = document.getElementById('cancel-edit-btn');
+        const saveProfileBtn = document.getElementById('save-profile-btn');
+        const profileInputs = document.querySelectorAll('#profile-section input');
+
+        editProfileBtn.addEventListener('click', function() {
+            profileInputs.forEach(input => input.disabled = false);
+            editProfileBtn.classList.add('hidden');
+            cancelEditBtn.classList.remove('hidden');
+            saveProfileBtn.classList.remove('hidden');
+        });
+
+        cancelEditBtn.addEventListener('click', function() {
+            profileInputs.forEach(input => input.disabled = true);
+            editProfileBtn.classList.remove('hidden');
+            cancelEditBtn.classList.add('hidden');
+            saveProfileBtn.classList.add('hidden');
+        });
+
+        // Password validation
+        document.getElementById('submit-btn').addEventListener('click', function(e) {
+            const password = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-new-password').value;
+            const passwordError = document.getElementById('password-error');
+            const confirmError = document.getElementById('confirm-error');
+            let isValid = true;
+
+            // Reset errors
+            passwordError.classList.add('hidden');
+            confirmError.classList.add('hidden');
+
+            // Check password length
+            if (password.length < 8) {
+                passwordError.classList.remove('hidden');
+                isValid = false;
+            }
+
+            // Check password match
+            if (password !== confirmPassword) {
+                confirmError.classList.remove('hidden');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                e.preventDefault();
+            }
+            });
+    </script>
+</body>
+</html>

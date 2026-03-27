@@ -15,6 +15,10 @@ class User(db.Model,UserMixin):
     full_name = db.Column(db.String(120), nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), default=func.now())
+    phone=db.Column(db.Integer)
+    date_of_birth=db.Column(db.Text)
+    state=db.Column(db.String(120))
+    city=db.Column(db.String(120))
 
 class Survey(db.Model):
     id = db.Column(db.Integer, primary_key=True)
