@@ -20,6 +20,15 @@
         }
     </style>
 </head>
+{% with messages = get_flashed_messages(category_filter=["popup"]) %}
+    {% if messages %}
+        <script>
+            {% for message in messages %}
+            alert("{{message}}");
+            {% endfor %}
+        </script>
+    {% endif %}
+{% endwith %}
 <body class="font-sans antialiased text-gray-800">
     <!-- Navigation -->
     <nav class="bg-white shadow-sm">

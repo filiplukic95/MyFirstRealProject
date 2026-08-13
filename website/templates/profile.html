@@ -18,8 +18,31 @@
             border-bottom: 2px solid #3b82f6;
             color: #3b82f6;
         }
+        .alert-box {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            }
+        .form-info {
+            color: green;
+            font-weight: bold;
+            }
+        .warning {
+            color: red;
+            font-weight: bold;
+        }
     </style>
 </head>
+{% with messages = get_flashed_messages(category_filter=["popup"]) %}
+    {% if messages %}
+        <script>
+            {% for message in messages %}
+            alert("{{message}}");
+            {% endfor %}
+        </script>
+    {% endif %}
+{% endwith %}
 <body class="font-sans antialiased text-gray-800 bg-gray-50">
     <!-- Navigation -->
     <nav class="bg-white shadow-sm">
@@ -81,11 +104,8 @@
                     <img class="h-20 w-20 rounded-full border-4 border-white" src="http://static.photos/people/200x200/4" alt="Profile photo">
                 </div>
                 <div class="ml-6">
-                    <h1 class="text-3xl font-bold text-white" id="profile-name">John Doe</h1>
-                    <p class="text-blue-100" id="profile-email">john.doe@example.com</p>
-                    <p class="mt-2 text-blue-100">
-                        Member since: <span id="member-since">January 2023</span>
-                    </p>
+                    <h1 class="text-3xl font-bold text-white" id="profile-name">{{full_name}}</h1>
+                    <p class="text-blue-100" id="profile-email">{{current_user.email}}</p>
                 </div>
             </div>
         </div>
@@ -123,13 +143,15 @@
                 </p>
             </div>
             <div class="px-6 py-4">
-                {% with messages=get_flashed_messages() %}
+                {% with messages=get_flashed_messages(with_categories=true) %}
                     {% if messages %}
-                        <ul class="flashes">
-                            {% for message in messages %}
-                                <li style="color: green; font-weight: bold;">{{message}}</li>
+                            {% for category, message in messages %}
+                            {% if category != 'popup' %}
+                                <div class="alert-box {{category}}">
+                                    {{message}}
+                                </div>
+                            {% endif %}
                             {% endfor %}
-                        </ul>
                     {% endif %}
                 {% endwith %}
                 <form method="post">
@@ -262,13 +284,17 @@
                             <p class="text-sm text-blue-700 mt-1">Monthly subscription</p>
                         </div>
                         <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                            Active
+                            {{sub.status}}
                         </span>
                     </div>
                     <div class="mt-4 border-t border-blue-200 pt-4">
                         <div class="flex justify-between text-sm mb-2">
                             <span class="text-blue-800">Next billing date:</span>
-                            <span class="font-medium text-blue-900">December 15, 2023</span>
+                            {% if sub and current_user.is_subscribed %}
+                            <span class="font-medium text-blue-900">{{sub.end_date.strftime('%d.%m.%Y.')}}</span>
+                            {% else %}
+                            <span class="font-medium text-blue-900">No active subscriptions</span>
+                            {% endif %}
                         </div>
                         <div class="flex justify-between text-sm mb-4">
                             <span class="text-blue-800">Amount:</span>
@@ -278,9 +304,11 @@
                             <button type="button" class="inline-flex items-center px-4 py-2 border border-blue-300 shadow-sm text-sm font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                 Change Plan
                             </button>
-                            <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                                Cancel Subscription
-                            </button>
+                            <form id="cancel-form" action="/cancel-subscription" method="post">
+                                <button type="submit"  class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                    Cancel Subscription
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -472,6 +500,22 @@
                 e.preventDefault();
             }
             });
+        const form = document.getElementById('cancel-form');
+
+        if (form) {
+            form.addEventListener('submit',
+            function(event) {
+                            event.preventDefault();
+
+                            const con= confirm ("Are you sure you want to cancel your subscription? You will have access until the end of your paid period.");
+
+                            if (con) {
+                                this.submit();
+                                } else {
+        console.log("User gave up on cancelation");
+        }
+        });
+        }
     </script>
 </body>
 </html>

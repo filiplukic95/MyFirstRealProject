@@ -1,6 +1,9 @@
+
+
 from . import db
 from flask_login import UserMixin
 from sqlalchemy.sql import func
+from datetime import datetime, timezone
 
 
 class Questions(db.Model):
@@ -19,6 +22,22 @@ class User(db.Model,UserMixin):
     date_of_birth=db.Column(db.Text)
     state=db.Column(db.String(120))
     city=db.Column(db.String(120))
+    subscriptions=db.relationship("Subscription", backref="owner",lazy=True)
+    @property
+    def is_subscribed(self):
+        last_sub=Subscription.query.filter_by(user_id=self.id).order_by(Subscription.end_date.desc()).first()
+        if last_sub and last_sub.end_date>datetime.now(timezone.utc).replace(tzinfo=None):
+            return True
+        return False
+
+class Subscription(db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    begin_date=db.Column(db.DateTime, nullable=False,default=datetime.now(timezone.utc))
+    end_date=db.Column(db.DateTime,nullable=False)
+    status=db.Column(db.String(20),default="Active")
+    user_id=db.Column(db.Integer,db.ForeignKey("user.id"),nullable=False)
+    auto_renew=db.Column(db.Boolean,default=True)
+    stripe_subscription_id=db.Column(db.String(100))
 
 class Survey(db.Model):
     id = db.Column(db.Integer, primary_key=True)

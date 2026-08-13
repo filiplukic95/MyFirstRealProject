@@ -1,27 +1,15 @@
 from website import db, create_app
-from website.models import Questions
+from website.models import User,Subscription
 import json
+from datetime import datetime, timedelta, timezone
+
 app = create_app()
 
 with app.app_context():
-    q1 = Questions(
-        question="Gde si brate moj?",
-        stage=2,
-        v_group_name="Flexion",
-        options=json.dumps([
-        "Svuda", "Tu i tamo", "Po malo", "Ne"
-        ])
-    )
+    me=User.query.filter_by(email="mirko@gmail.com").first()
 
-    q2 = Questions(
-        question="Levo desno tamo vamo?",
-        stage=2,
-        v_group_name="Flexion",
-        options=json.dumps([
-            "It hurts", "Why so much?", "Here and there", "Too much"
-        ])
-    )
+    sub=Subscription(end_date=datetime.now(timezone.utc)+timedelta(days=30),owner=me)
 
-    db.session.add_all([q1, q2])
+    db.session.add(sub)
     db.session.commit()
     print("Test questions inserted successfully.")
